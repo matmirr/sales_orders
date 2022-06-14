@@ -1,0 +1,6 @@
+ID,Email,FirstName,LastName,Country_code,CreatedOn,DeliveryDate,OrderStatus
+4b107c38-e44f-48b0-ab75-b28b38aba8f4,marlonvera@gmail.com,Brandon,Vera,US,2022-01-13,,-1
+5d8e4b7e-9f06-4b70-af5e-be395e909689,fedor_emelianko@gmail.com,Fedor,Yemeliánenko,RU,2022-06-09,2022-06-11T00:00:00Z,3
+9d03cfaa-61a4-4f2c-b4b7-505a8cd7aee2,thenotoriousok@gmail.com,Connor,McGregor,IE,2022-11-27,2022-12-23T00:00:00Z,3
+88cb4fc0-1ee4-4c60-b38b-d96c50488cb4,thenatural@gmail.com,Randy,Couture,US,2022-09-24,,2
+9ec80443-d403-4ea8-ba89-588fcc035f6e,elrasta@gmail.com,Santiago,Ponzinibbio,AR,2022-06-13,,1
