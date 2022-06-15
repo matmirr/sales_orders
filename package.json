@@ -18,14 +18,16 @@
     },
     "devDependencies": {
         "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
-        "@sap/ux-specification": "^1.96.0",
+        "@sap/ux-specification": "^1.100.4",
         "@sapui5/ts-types": "^1.92.2",
         "cds-swagger-ui-express": "^0.3.0",
         "eslint": "^7.32.0",
         "sqlite3": "^5.0.2"
     },
     "scripts": {
-        "start": "cds run"
+        "start": "cds run",
+        "watch-orders": "cds watch --open orders/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy sales_orders --delete-services --delete-service-keys"
     },
     "eslintConfig": {
         "extends": "eslint:recommended",
@@ -61,5 +63,8 @@
         "hana": {
             "deploy-format": "hdbtable"
         }
-    }
+    },
+    "sapux": [
+        "app/orders"
+    ]
 }

@@ -1,0 +1,184 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "matmir.orders",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-elements-writer:lrop",
+            "version": "0.3.6",
+            "toolsId": "f364817c-d043-4e21-8169-30d19ccca263"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/manage-orders/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "matmir-orders-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "SalesOrders",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "matmir.orders.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "SalesOrdersList",
+                    "target": "SalesOrdersList"
+                },
+                {
+                    "pattern": "SalesOrders({key}):?query:",
+                    "name": "SalesOrdersObjectPage",
+                    "target": "SalesOrdersObjectPage"
+                },
+                {
+                    "pattern": "SalesOrders({key})/Items({key2}):?query:",
+                    "name": "SalesOrderItemsObjectPage",
+                    "target": "SalesOrderItemsObjectPage"
+                }
+            ],
+            "targets": {
+                "SalesOrdersList": {
+                    "type": "Component",
+                    "id": "SalesOrdersList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "SalesOrders",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "SalesOrders": {
+                                    "detail": {
+                                        "route": "SalesOrdersObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "SalesOrdersObjectPage": {
+                    "type": "Component",
+                    "id": "SalesOrdersObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "SalesOrders",
+                            "navigation": {
+                                "Items": {
+                                    "detail": {
+                                        "route": "SalesOrderItemsObjectPage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "SalesOrderItemsObjectPage": {
+                    "type": "Component",
+                    "id": "SalesOrderItemsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "SalesOrderItems"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}

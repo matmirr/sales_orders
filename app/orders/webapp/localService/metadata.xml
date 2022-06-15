@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ManageOrders" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="SalesOrders" EntityType="ManageOrders.SalesOrders">
+                    <NavigationPropertyBinding Path="Country" Target="Countries"/>
+                    <NavigationPropertyBinding Path="Items" Target="SalesOrderItems"/>
+                </EntitySet>
+                <EntitySet Name="SalesOrderItems" EntityType="ManageOrders.SalesOrderItems">
+                    <NavigationPropertyBinding Path="SalesOrder" Target="SalesOrders"/>
+                </EntitySet>
+                <EntitySet Name="Countries" EntityType="ManageOrders.Countries">
+                    <NavigationPropertyBinding Path="texts" Target="Countries_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="Countries_texts"/>
+                </EntitySet>
+                <EntitySet Name="Countries_texts" EntityType="ManageOrders.Countries_texts"/>
+            </EntityContainer>
+            <EntityType Name="SalesOrders">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="Email" Type="Edm.String" MaxLength="30"/>
+                <Property Name="FirstName" Type="Edm.String" MaxLength="30"/>
+                <Property Name="LastName" Type="Edm.String"/>
+                <NavigationProperty Name="Country" Type="ManageOrders.Countries">
+                    <ReferentialConstraint Property="Country_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="Country_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="CreatedOn" Type="Edm.Date"/>
+                <Property Name="DeliveryDate" Type="Edm.DateTimeOffset"/>
+                <Property Name="OrderStatus" Type="Edm.Int32"/>
+                <NavigationProperty Name="Items" Type="Collection(ManageOrders.SalesOrderItems)" Partner="SalesOrder">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="SalesOrderItems">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="SalesOrder" Type="ManageOrders.SalesOrders" Partner="Items">
+                    <ReferentialConstraint Property="SalesOrder_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="SalesOrder_ID" Type="Edm.Guid"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="40"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40"/>
+                <Property Name="ReleaseDate" Type="Edm.Date"/>
+                <Property Name="DiscontinuedDate" Type="Edm.Date"/>
+                <Property Name="Price" Type="Edm.Decimal" Scale="2" Precision="12"/>
+                <Property Name="Height" Type="Edm.Decimal" Scale="3" Precision="15"/>
+                <Property Name="Width" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="Depth" Type="Edm.Decimal" Scale="2" Precision="12"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Scale="3" Precision="16"/>
+                <Property Name="UnitOfMeasure" Type="Edm.String" MaxLength="3"/>
+                <Property Name="ImageUrl" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Countries">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(ManageOrders.Countries_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="ManageOrders.Countries_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="Countries_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <Annotations Target="ManageOrders.SalesOrders/Email">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ManageOrders.SalesOrders/Country">
+                <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                    <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                    </Annotations>
+                    <Annotations Target="ManageOrders.SalesOrders/Country_code">
+                        <Annotation Term="Common.Label" String="{i18n>Country}"/>
+                            <Annotation Term="Common.ValueList">
+                                <Record Type="Common.ValueListType">
+                                    <PropertyValue Property="Label" String="{i18n>Country}"/>
+                                        <PropertyValue Property="CollectionPath" String="Countries"/>
+                                        <PropertyValue Property="Parameters">
+                                            <Collection>
+                                                <Record Type="Common.ValueListParameterInOut">
+                                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Country_code"/>
+                                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                                </Record>
+                                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                                </Record>
+                                            </Collection>
+                                        </PropertyValue>
+                                    </Record>
+                                </Annotation>
+                                <Annotation Term="Core.Description" String="{i18n>CountryCode.Description}"/>
+                                </Annotations>
+                                <Annotations Target="ManageOrders.Countries">
+                                    <Annotation Term="UI.Identification">
+                                        <Collection>
+                                            <Record Type="UI.DataField">
+                                                <PropertyValue Property="Value" Path="name"/>
+                                            </Record>
+                                        </Collection>
+                                    </Annotation>
+                                </Annotations>
+                                <Annotations Target="ManageOrders.Countries/name">
+                                    <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                    </Annotations>
+                                    <Annotations Target="ManageOrders.Countries/descr">
+                                        <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                        </Annotations>
+                                        <Annotations Target="ManageOrders.Countries/code">
+                                            <Annotation Term="Common.Text" Path="name"/>
+                                            <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
+                                            </Annotations>
+                                            <Annotations Target="ManageOrders.Countries_texts/name">
+                                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                </Annotations>
+                                                <Annotations Target="ManageOrders.Countries_texts/descr">
+                                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="ManageOrders.Countries_texts/code">
+                                                        <Annotation Term="Common.Text" Path="name"/>
+                                                        <Annotation Term="Common.Label" String="{i18n>CountryCode}"/>
+                                                        </Annotations>
+                                                    </Schema>
+                                                </edmx:DataServices>
+                                            </edmx:Edmx>
