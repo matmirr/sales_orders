@@ -158,7 +158,9 @@ module.exports = (srv) => {
             order.TotalPrice = await getTotalPrice(order);
 
         } )
+
         return data;
+
     });
 
     //*******UPDATE*******//
@@ -196,6 +198,5 @@ module.exports = (srv) => {
         return result;
 
     });
-
 
 };
