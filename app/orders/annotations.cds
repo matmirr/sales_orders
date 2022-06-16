@@ -6,8 +6,8 @@ using ManageOrders as service from '../../srv/sales_orders';
 annotate service.SalesOrders with @(
 
     UI.HeaderInfo      : {
-        TypeName       : 'Sales Order',
-        TypeNamePlural : 'Sales Orders',
+        TypeName       : '{i18n>OrderHeader}',
+        TypeNamePlural : '{i18n>OrderHeaders}',
         Title          : {
             Label : 'Status',
             Value : OrderStatus.Text
@@ -29,79 +29,85 @@ annotate service.SalesOrders with @(
     UI.LineItem        : [
         {
             $Type : 'UI.DataField',
-            Label : 'Email',
+            Label : '{i18n>Email}',
             Value : Email,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'FirstName',
+            Label : '{i18n>FirstName}',
             Value : FirstName,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'LastName',
+            Label : '{i18n>LastName}',
             Value : LastName,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Country',
+            Label : '{i18n>Country_ID}',
             Value : Country_ID,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'DeliveryDate',
+            Label : '{i18n>DeliveryDate}',
             Value : DeliveryDate,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'OrderStatus',
+            Label : '{i18n>OrderStatus}',
             Value : OrderStatus_ID,
         }
     ]
 );
 
+// Navigation
 annotate service.SalesOrders with @(
     UI.FieldGroup #OrderDetails : {
         $Type : 'UI.FieldGroupType',
         Data  : [
             {
                 $Type : 'UI.DataField',
-                Label : 'FirstName',
+                Label : '{i18n>FirstName}',
                 Value : FirstName,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'LastName',
+                Label : '{i18n>LastName}',
                 Value : LastName,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Email',
+                Label : '{i18n>Email}',
                 Value : Email,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Country',
+                Label : '{i18n>Country_ID}',
                 Value : Country_ID
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'DeliveryDate',
+                Label : '{i18n>DeliveryDate}',
                 Value : DeliveryDate,
             },
+            {
+                $Type : 'UI.DataField',
+                Label : '{i18n>OrderStatus}',
+                Value : OrderStatus_ID,
+            }
         ],
     },
     UI.Facets                   : [
         {
             $Type  : 'UI.ReferenceFacet',
             ID     : 'OrderDetails',
-            Label  : 'General Information',
+            Label  : '{i18n>OrderDetails}',
             Target : '@UI.FieldGroup#OrderDetails',
         },
         {
             $Type  : 'UI.ReferenceFacet',
             ID     : 'Items',
-            Label  : 'Details',
+            Label  : '{i18n>Details}',
             Target : 'Items/@UI.LineItem',
         }
     ]
@@ -110,12 +116,11 @@ annotate service.SalesOrders with @(
 /**
  * Annotations for SalesOrderItems Entity
  */
-
 annotate service.SalesOrderItems with @UI : {
 
     HeaderInfo              : {
-        TypeName       : 'Item',
-        TypeNamePlural : 'Items'
+        TypeName       : '{i18n>Item}',
+        TypeNamePlural : '{i18n>Items}'
     },
 
     PresentationVariant     : {
@@ -130,62 +135,62 @@ annotate service.SalesOrderItems with @UI : {
     LineItem                : [
         {
             $Type : 'UI.DataField',
-            Label : 'ImageUrl',
+            Label : '{i18n>ImageUrl}',
             Value : ImageUrl,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Name',
+            Label : '{i18n>ItemName}',
             Value : Name,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Description',
+            Label : '{i18n>ItemDescription}',
             Value : Description,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'ReleaseDate',
+            Label : '{i18n>ReleaseDate}',
             Value : ReleaseDate,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'DiscontinuedDate',
+            Label : '{i18n>DiscontinuedDate}',
             Value : DiscontinuedDate,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Price',
+            Label : '{i18n>Price}',
             Value : Price,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Height',
+            Label : '{i18n>Height}',
             Value : Height,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Width',
+            Label : '{i18n>Width}',
             Value : Width,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Depth',
+            Label : '{i18n>Depth}',
             Value : Depth,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'UnitOfMeasure',
+            Label : '{i18n>UnitOfMeasure}',
             Value : UnitOfMeasure,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'Quantity',
+            Label : '{i18n>Quantity}',
             Value : Quantity,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'TotalLine',
+            Label : '{i18n>TotalLine}',
             Value : TotalLine,
         },
     ],
@@ -195,66 +200,88 @@ annotate service.SalesOrderItems with @UI : {
         Data  : [
             {
                 $Type : 'UI.DataField',
-                Label : 'ImageUrl',
-                Value : ImageUrl,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'Name',
+                Label : '{i18n>ItemName}',
                 Value : Name,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Description',
+                Label : '{i18n>ItemDescription}',
                 Value : Description,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'ReleaseDate',
+                Label : '{i18n>ReleaseDate}',
                 Value : ReleaseDate,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'DiscontinuedDate',
+                Label : '{i18n>DiscontinuedDate}',
                 Value : DiscontinuedDate,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Price',
+                Label : '{i18n>Price}',
                 Value : Price,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Height',
+                Label : '{i18n>Height}',
                 Value : Height,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Width',
+                Label : '{i18n>Width}',
                 Value : Width,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Depth',
+                Label : '{i18n>Depth}',
                 Value : Depth,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'Quantity',
+                Label : '{i18n>Quantity}',
                 Value : Quantity,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'UnitOfMeasure',
+                Label : '{i18n>UnitOfMeasure}',
                 Value : UnitOfMeasure,
             },
         ]
     },
 
+    FieldGroup #ItemHeader  : {
+        $Type : 'UI.FieldGroupType',
+        Data  : [
+            {
+                $Type : 'UI.DataField',
+                Label : '{i18n>ItemName}',
+                Value : Name,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : '{i18n>TotalLine}',
+                Value : TotalLine,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : '{i18n>ImageUrl}',
+                Value : ImageUrl,
+            },
+        ]
+    },
+
+    HeaderFacets            : [{
+        $Type  : 'UI.ReferenceFacet',
+        Target : '@UI.FieldGroup#ItemHeader',
+        Label  : 'ItemHeader',
+    }, ],
+
     Facets                  : [{
         $Type  : 'UI.ReferenceFacet',
         ID     : 'ItemDetails',
-        Label  : 'General Information',
+        Label  : '{i18n>ItemDetails}',
         Target : '@UI.FieldGroup#ItemDetails',
     }]
 
@@ -317,6 +344,7 @@ annotate service.SalesOrders with {
  * Annotations for VH_Countries Entity
  */
 annotate service.VH_Countries with {
+    
     Code @(Common : {Text : {
         $value                 : Text,
         ![@UI.TextArrangement] : #TextOnly,

@@ -5,10 +5,11 @@ define service ManageOrders {
     @odata.draft.enabled
     entity SalesOrders     as projection on matmir.SalesOrders;
 
-    entity SalesOrderItems as select from matmir.SalesOrderItems {
+    entity SalesOrderItems as
+        select from matmir.SalesOrderItems {
             *,
-            Price * Quantity as TotalLine : Decimal(12, 2) 
-    };
+            Price * Quantity as TotalLine : Decimal(12, 2)
+        };
 
 
     @readonly

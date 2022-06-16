@@ -30,7 +30,6 @@ type status : Integer enum {
  */
 
 entity SalesOrders : cuid {
-
     @mandatory
     Email              : String(30);
     FirstName          : String(30);
@@ -44,21 +43,19 @@ entity SalesOrders : cuid {
     virtual TotalPrice : Decimal(12, 2)
 }
 
-
 entity SalesOrderItems : cuid {
-
-    SalesOrder        : Association to one SalesOrders;
-    Name              : String(40);
-    Description       : String(40);
-    ReleaseDate       : Date;
-    DiscontinuedDate  : Date;
-    Price             : Decimal(12, 2);
-    Height            : Decimal(15, 3);
-    Width             : Decimal(13, 3);
-    Depth             : Decimal(12, 2);
-    Quantity          : Decimal(16, 3);
-    UnitOfMeasure     : zde_meins;
-    ImageUrl          : String;
+    SalesOrder       : Association to one SalesOrders;
+    Name             : String(40);
+    Description      : String(40);
+    ReleaseDate      : Date;
+    DiscontinuedDate : Date;
+    Price            : Decimal(12, 2);
+    Height           : Decimal(15, 3);
+    Width            : Decimal(13, 3);
+    Depth            : Decimal(12, 2);
+    Quantity         : Decimal(16, 3);
+    UnitOfMeasure    : zde_meins;
+    ImageUrl         : String;
 }
 
 entity Countries {
