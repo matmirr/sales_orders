@@ -14,8 +14,7 @@ const createSalesOrder = (order) => {
         Country: order.Country_ID,
         CreatedOn: order.CreatedOn,
         DeliveryDate: order.DeliveryDate,
-        OrderStatus: 1, // submitted     
-
+        OrderStatus: order.OrderStatus
     })
 
 };
@@ -109,6 +108,7 @@ module.exports = (srv) => {
     srv.before("CREATE", 'SalesOrders', (req) => {
 
         req.data.CreatedOn = new Date().toISOString().slice(0, 10);
+        req.data.OrderStatus_ID = 1; // submitted     
 
         return req
 
@@ -154,10 +154,10 @@ module.exports = (srv) => {
 
         }
 
-        orders.forEach( async order => {
+        orders.forEach(async order => {
             order.TotalPrice = await getTotalPrice(order);
 
-        } )
+        })
 
         return data;
 
