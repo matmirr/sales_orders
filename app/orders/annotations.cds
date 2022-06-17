@@ -56,7 +56,12 @@ annotate service.SalesOrders with @(
             $Type : 'UI.DataField',
             Label : '{i18n>OrderStatus}',
             Value : OrderStatus_ID,
-        }
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : '{i18n>TotalPrice}',
+            Value : TotalPrice,
+        },
     ]
 );
 

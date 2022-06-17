@@ -140,7 +140,7 @@ module.exports = (srv) => {
     });
 
     //****AFTER-READ****//
-    srv.after("READ", 'SalesOrders', (data) => {
+    srv.after("READ", 'SalesOrders', async (data) => {
 
         let orders = [];
 
@@ -154,12 +154,12 @@ module.exports = (srv) => {
 
         }
 
-        orders.forEach(async order => {
+        orders.forEach( async order => {
             order.TotalPrice = await getTotalPrice(order);
 
         })
 
-        return data;
+        return await data;
 
     });
 
