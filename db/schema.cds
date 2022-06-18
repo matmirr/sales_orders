@@ -11,8 +11,8 @@ using {
  */
 type zde_meins : String(3) enum {
 
-    PC; // Piece
-    PK // Pack
+    CM;   // Centimetres
+    ![IN] // Inches
 
 }
 
