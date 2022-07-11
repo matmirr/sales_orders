@@ -154,10 +154,12 @@ module.exports = (srv) => {
 
         }
 
-        orders.forEach( async order => {
-            order.TotalPrice = await getTotalPrice(order);
+        for (let index = 0; index < orders.length; index++) {
 
-        })
+              const order = orders[index]
+              order.TotalPrice = await getTotalPrice(order)
+   
+            }
 
         return await data;
 
